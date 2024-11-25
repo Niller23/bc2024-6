@@ -1,0 +1,132 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Notes API",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/notes/{name}": {
+        "get": {
+          "summary": "Get a note by name",
+          "parameters": [
+            {
+              "name": "name",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "The content of the note"
+            },
+            "404": {
+              "description": "Note not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a note by name",
+          "parameters": [
+            {
+              "name": "name",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Note updated"
+            },
+            "404": {
+              "description": "Note not found"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a note by name",
+          "parameters": [
+            {
+              "name": "name",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "The name of the note"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Note deleted"
+            },
+            "404": {
+              "description": "Note not found"
+            }
+          }
+        }
+      },
+      "/notes": {
+        "get": {
+          "summary": "Get all notes",
+          "responses": {
+            "200": {
+              "description": "A list of notes"
+            }
+          }
+        }
+      },
+      "/write": {
+        "post": {
+          "summary": "Create a new note",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "note_name": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "responses": {
+              "201": {
+                "description": "Note created"
+              },
+              "400": {
+                "description": "Note already exists"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
